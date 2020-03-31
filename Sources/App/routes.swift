@@ -9,9 +9,22 @@ public func routes(_ router: Router) throws {
     
     // Basic "Hello, world!" example
     router.get("hello") { req in
-        return "Hello, world!"
+        return "Hello"
     }
-
+    
+    router.get("user") { (req) in
+        return "User"
+    }
+    
+    router.post("programmers") { (req) in
+        return "Number one"
+    }
+    
+    router.get("user", String.parameter) { req -> String in
+        let user = try req.parameters.next(String.self)
+        return "User: \(user)"
+    }
+    
     // Example of configuring a controller
     let todoController = TodoController()
     router.get("todos", use: todoController.index)
